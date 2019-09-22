@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mobile dev</string>
+    <string name="sign_in_label">Sign in</string>
+    <string name="sign_up_label">Sign up</string>
+    <string name="email_label">Email</string>
+    <string name="password_label">Password</string>
+    <string name="phone_label">Phone number</string>
+    <string name="name_label">Name</string>
+    <string name="password_wrong">Wrong password</string>
+    <string name="min_length_password">Minimal length for password is 8</string>
+    <string name="email_wrong">Wrong email</string>
+    <string name="sign_in_failed_title">Sign in failed</string>
+    <string name="sign_in_failed_message">Please check yor email and password</string>
+    <string name="ok_label">OK</string>
+    <string name="phone_wrong">Wrong phone</string>
+    <string name="name_wrong">Wrong name</string>
+    <string name="sign_up_failed_title">Sign up failed</string>
+    <string name="sign_up_failed_message">Please try later</string>
+    <string name="load">Load</string>
+    <string name="welcome_label">Welcome</string>
+    <string name="sign_out_label">Sign out</string>
+</resources>

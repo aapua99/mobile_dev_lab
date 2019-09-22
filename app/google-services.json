@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "422185046534",
+    "firebase_url": "https://mobile-69d73.firebaseio.com",
+    "project_id": "mobile-69d73",
+    "storage_bucket": "mobile-69d73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422185046534:android:51ddf28d3e2b4e902ca987",
+        "android_client_info": {
+          "package_name": "ua.lviv.iot.andriy_popov.mobiledev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422185046534-ktjv4o2dtgmmbiegtgiufqa0snrdh4c0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSoyavRUIhijzl7NXEkxHVsx-BIoBAEak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422185046534-ktjv4o2dtgmmbiegtgiufqa0snrdh4c0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
