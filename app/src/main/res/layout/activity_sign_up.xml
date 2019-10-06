@@ -6,54 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
     <!--File for review-->
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/LabelOnPage"
-        android:layout_marginTop="@android:dimen/notification_large_icon_width"
-        android:text="@string/sign_up_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/email_wrapper"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@android:dimen/notification_large_icon_height"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-    <EditText
-        android:id="@+id/name_wrapper"
-        android:inputType="textPersonName"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_wrapper"/>
-
-    <EditText
-        android:inputType="phone"
-        android:id="@+id/phone_wrapper"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_wrapper"/>
-
-    <EditText
-        android:id="@+id/password_wrapper"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_wrapper" />
-
     <Button
         android:id="@+id/button_sign_up"
         android:layout_width="150dp"
@@ -80,6 +32,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_sign_up" />
+
+    <EditText
+        android:id="@+id/phone_wrapper"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_wrapper" />
+
+    <EditText
+        android:id="@+id/password_wrapper"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone_wrapper" />
+
+    <EditText
+        android:id="@+id/email_wrapper"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@android:dimen/notification_large_icon_height"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <EditText
+        android:id="@+id/name_wrapper"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_wrapper" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/LabelOnPage"
+        android:layout_marginTop="@android:dimen/notification_large_icon_width"
+        android:text="@string/sign_up_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

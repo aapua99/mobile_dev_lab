@@ -1,6 +1,5 @@
 package ua.lviv.iot.andriy_popov.mobiledev;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,9 +10,6 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-//File for review
-
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView username;
@@ -55,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);

@@ -14,16 +14,13 @@ import android.widget.EditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-//File for review
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int MIN_LENGTH_PASS = 8;
     private EditText passEdit;
     private EditText emailEdit;
-
-    DialogFragment loadFragment;
-
+    private DialogFragment loadFragment;
     private FirebaseAuth auth;
 
     @Override
@@ -85,15 +82,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signIn() {
 
-        if(validateFields()){
+        if (validateFields()) {
             loadFragment.show(getFragmentManager(), "Comment");
             auth.signInWithEmailAndPassword(emailEdit.getText().toString(), passEdit.getText().toString())
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
                             loadFragment.dismiss();
                             onSignInSuccess();
-                        }
-                        else{
+                        } else {
                             loadFragment.dismiss();
                             onSignInError();
                         }
@@ -102,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void onSignInError() {
-        final AlertDialog alertDialog=new AlertDialog.Builder(this).create();
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(getString(R.string.sign_in_failed_title));
         alertDialog.setMessage(getString(R.string.sign_in_failed_message));
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok_label),
@@ -114,6 +110,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);

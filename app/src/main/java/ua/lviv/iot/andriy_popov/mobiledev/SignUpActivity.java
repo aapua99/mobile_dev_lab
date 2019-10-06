@@ -15,8 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-//File for review
-
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int MIN_LENGTH_PASS = 8;
@@ -25,8 +23,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText nameEdit;
     private EditText phoneEdit;
     private EditText passEdit;
-
-    DialogFragment loadFragment;
+    private DialogFragment loadFragment;
 
     private FirebaseAuth auth;
 
@@ -44,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         nameEdit.setHint(R.string.name_label);
         phoneEdit.setHint(R.string.phone_label);
         passEdit.setHint(R.string.password_label);
-        Button signInButton =findViewById(R.id.button_sign_in);
+        Button signInButton = findViewById(R.id.button_sign_in);
         Button signUpButton = findViewById(R.id.button_sign_up);
         signInButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
@@ -52,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.button_sign_in:
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
@@ -65,32 +62,32 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signUp() {
-        if(validateFields()){
+        if (validateFields()) {
             loadFragment.show(getFragmentManager(), "Comment");
             auth.createUserWithEmailAndPassword(emailEdit.getText().toString(), passEdit.getText().toString())
-                    .addOnCompleteListener(this,task-> {
-                       if(task.isSuccessful()){
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
 
-                           onSuccessfulSignUp();
-                       }else{
-                           loadFragment.dismiss();
-                           onFailedSignUp();
-                       }
+                            onSuccessfulSignUp();
+                        } else {
+                            loadFragment.dismiss();
+                            onFailedSignUp();
+                        }
                     });
         }
     }
 
     private void onSuccessfulSignUp() {
-        FirebaseUser user= auth.getCurrentUser();
-        if(user != null){
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
             UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(nameEdit.getText().toString()).build();
             user.updateProfile(profileChangeRequest)
                     .addOnCompleteListener(task -> {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             loadFragment.dismiss();
                             startActivity(new Intent(this, MainActivity.class));
                             finish();
-                        }else{
+                        } else {
                             loadFragment.dismiss();
                             startActivity(new Intent(this, MainActivity.class));
                             finish();
@@ -100,7 +97,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void onFailedSignUp() {
-        final AlertDialog alertDialog=new AlertDialog.Builder(this).create();
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(getString(R.string.sign_up_failed_title));
         alertDialog.setMessage(getString(R.string.sign_up_failed_message));
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok_label),
@@ -121,20 +118,21 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             passEdit.setError(null);
         }
-        if (!Patterns.PHONE.matcher(phoneEdit.getText().toString()).matches()){
+        if (!Patterns.PHONE.matcher(phoneEdit.getText().toString()).matches()) {
             phoneEdit.setError(getString(R.string.phone_wrong));
             return false;
-        }else{
+        } else {
             phoneEdit.setError(null);
         }
-        if(nameEdit.getText().toString().isEmpty()){
+        if (nameEdit.getText().toString().isEmpty()) {
             nameEdit.setError(getString(R.string.name_wrong));
-            return  false;
-        }else{
+            return false;
+        } else {
             nameEdit.setError(null);
         }
         return true;
     }
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
