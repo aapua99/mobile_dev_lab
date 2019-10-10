@@ -37,10 +37,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         nameEdit = findViewById(R.id.name_wrapper);
         phoneEdit = findViewById(R.id.phone_wrapper);
         passEdit = findViewById(R.id.password_wrapper);
-        emailEdit.setHint(R.string.email_label);
-        nameEdit.setHint(R.string.name_label);
-        phoneEdit.setHint(R.string.phone_label);
-        passEdit.setHint(R.string.password_label);
         Button signInButton = findViewById(R.id.button_sign_in);
         Button signUpButton = findViewById(R.id.button_sign_up);
         signInButton.setOnClickListener(this);

@@ -35,8 +35,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         passEdit = findViewById(R.id.password_wrapper);
         emailEdit = findViewById(R.id.email_wrapper);
-        passEdit.setHint(R.string.password_label);
-        emailEdit.setHint(R.string.email_label);
         Button signInButton = findViewById(R.id.button_sign_in);
         Button signUpButton = findViewById(R.id.button_sign_up);
         signInButton.setOnClickListener(this);

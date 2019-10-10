@@ -47,6 +47,7 @@
             app:layout_constraintVertical_bias="0.8" />
 
         <EditText
+            android:hint="@string/email_label"
             android:id="@+id/email_wrapper"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
@@ -57,6 +58,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:hint="@string/password_label"
             android:id="@+id/password_wrapper"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
