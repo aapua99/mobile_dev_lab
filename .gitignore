@@ -36,9 +36,13 @@ proguard/
 captures/
 
 # IntelliJ
+<<<<<<< Updated upstream
 *.iml
 .idea
 .idea/*
+=======
+.idea
+>>>>>>> Stashed changes
 
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.

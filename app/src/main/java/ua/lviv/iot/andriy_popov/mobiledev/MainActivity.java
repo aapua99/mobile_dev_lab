@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     private TextView username;
     private FirebaseAuth auth;
 
@@ -22,33 +22,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         username = findViewById(R.id.username_label);
         auth = FirebaseAuth.getInstance();
         Button buttonSignOut = findViewById(R.id.button_sign_out);
-        buttonSignOut.setOnClickListener(this);
-
-        updateUI();
-
+        buttonSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+            }
+        });
     }
 
-    private void updateUI() {
+    @Override
+    protected void onResume() {
+        super.onResume();
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             username.setText(user.getDisplayName());
         } else {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
-        }
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_sign_out:
-                auth.signOut();
-                startActivity(new Intent(this, LoginActivity.class));
-                finish();
-                break;
-            default:
-                break;
         }
     }
 

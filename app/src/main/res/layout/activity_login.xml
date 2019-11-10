@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
-<!--File for review-->
+    <!--File for review-->
 
     <TextView
-        style="@style/LabelOnPage"
         android:id="@+id/textView"
+        style="@style/LabelOnPage"
         android:layout_marginTop="@android:dimen/notification_large_icon_width"
         android:text="@string/sign_in_label"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,22 +47,22 @@
             app:layout_constraintVertical_bias="0.8" />
 
         <EditText
-            android:hint="@string/email_label"
             android:id="@+id/email_wrapper"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:hint="@string/email_label"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:hint="@string/password_label"
             android:id="@+id/password_wrapper"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:hint="@string/password_label"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.50"
@@ -73,11 +73,11 @@
 
     <Button
         android:id="@+id/button_sign_up"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up_label"
         android:textSize="16sp"
-        style="?android:attr/borderlessButtonStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

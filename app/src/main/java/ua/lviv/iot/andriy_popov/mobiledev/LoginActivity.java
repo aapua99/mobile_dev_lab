@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText emailEdit;
     private DialogFragment loadFragment;
     private FirebaseAuth auth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +30,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
         loadFragment = new Load();
-        FirebaseUser user = auth.getCurrentUser();
-        if (user != null) {
-            updateUI();
-        }
+        user = auth.getCurrentUser();
         passEdit = findViewById(R.id.password_wrapper);
         emailEdit = findViewById(R.id.email_wrapper);
         Button signInButton = findViewById(R.id.button_sign_in);
@@ -41,19 +39,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signUpButton.setOnClickListener(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (user != null) {
+            updateUI();
+        }
+    }
+
     private void updateUI() {
         Intent i = new Intent(this, MainActivity.class);
         i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(i);
     }
 
-    private boolean validateFields() {
+    private boolean validateEmail() {
         if (!Patterns.EMAIL_ADDRESS.matcher(emailEdit.getText().toString()).matches()) {
             emailEdit.setError(getString(R.string.email_wrong));
             return false;
         } else {
             emailEdit.setError(null);
         }
+        return true;
+    }
+
+    private boolean validatePass() {
         if (passEdit.getText().toString().length() < MIN_LENGTH_PASS) {
             passEdit.setError(getString(R.string.min_length_password));
             return false;
@@ -62,7 +72,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         return true;
     }
-
 
     @Override
     public void onClick(View v) {
@@ -79,8 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void signIn() {
-
-        if (validateFields()) {
+        if (validateEmail() && validatePass()) {
             loadFragment.show(getFragmentManager(), "Comment");
             auth.signInWithEmailAndPassword(emailEdit.getText().toString(), passEdit.getText().toString())
                     .addOnCompleteListener(this, task -> {
