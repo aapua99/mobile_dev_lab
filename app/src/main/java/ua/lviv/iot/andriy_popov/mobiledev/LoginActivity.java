@@ -2,6 +2,7 @@ package ua.lviv.iot.andriy_popov.mobiledev;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import ua.lviv.iot.andriy_popov.mobiledev.ValidateFields;
 
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -17,7 +18,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final int MIN_LENGTH_PASS = 8;
     private EditText passEdit;
     private EditText emailEdit;
     private DialogFragment loadFragment;
@@ -53,25 +53,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(i);
     }
 
-    private boolean validateEmail() {
-        if (!Patterns.EMAIL_ADDRESS.matcher(emailEdit.getText().toString()).matches()) {
-            emailEdit.setError(getString(R.string.email_wrong));
-            return false;
-        } else {
-            emailEdit.setError(null);
-        }
-        return true;
-    }
 
-    private boolean validatePass() {
-        if (passEdit.getText().toString().length() < MIN_LENGTH_PASS) {
-            passEdit.setError(getString(R.string.min_length_password));
-            return false;
-        } else {
-            passEdit.setError(null);
-        }
-        return true;
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -88,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void signIn() {
-        if (validateEmail() && validatePass()) {
+        if (ValidateFields.validateEmail(emailEdit) && ValidateFields.validatePass(passEdit)) {
             loadFragment.show(getFragmentManager(), "Comment");
             auth.signInWithEmailAndPassword(emailEdit.getText().toString(), passEdit.getText().toString())
                     .addOnCompleteListener(this, task -> {

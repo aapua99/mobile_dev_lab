@@ -2,12 +2,14 @@ package ua.lviv.iot.andriy_popov.mobiledev;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import ua.lviv.iot.andriy_popov.mobiledev.ValidateFields;
 
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -58,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signUp() {
-        if (validateFields()) {
+        if (validateAllFields()) {
             loadFragment.show(getFragmentManager(), "Comment");
             auth.createUserWithEmailAndPassword(emailEdit.getText().toString(), passEdit.getText().toString())
                     .addOnCompleteListener(this, task -> {
@@ -71,6 +73,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     });
         }
+    }
+    private boolean validateAllFields() {
+      return ValidateFields.validateEmail(emailEdit) && ValidateFields.validateName(nameEdit) &&
+              ValidateFields.validatePhone(phoneEdit) && ValidateFields.validatePass(passEdit);
+
     }
 
     private void onSuccessfulSignUp() {
@@ -101,33 +108,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         alertDialog.show();
     }
 
-    private boolean validateFields() {
-        if (!Patterns.EMAIL_ADDRESS.matcher(emailEdit.getText().toString()).matches()) {
-            emailEdit.setError(getString(R.string.email_wrong));
-            return false;
-        } else {
-            emailEdit.setError(null);
-        }
-        if (passEdit.getText().toString().length() < MIN_LENGTH_PASS) {
-            passEdit.setError(getString(R.string.min_length_password));
-            return false;
-        } else {
-            passEdit.setError(null);
-        }
-        if (!Patterns.PHONE.matcher(phoneEdit.getText().toString()).matches()) {
-            phoneEdit.setError(getString(R.string.phone_wrong));
-            return false;
-        } else {
-            phoneEdit.setError(null);
-        }
-        if (nameEdit.getText().toString().isEmpty()) {
-            nameEdit.setError(getString(R.string.name_wrong));
-            return false;
-        } else {
-            nameEdit.setError(null);
-        }
-        return true;
-    }
+
 
     @Override
     public void onBackPressed() {
