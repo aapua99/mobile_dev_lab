@@ -1,6 +1,5 @@
 package ua.lviv.iot.andriy_popov.mobiledev;
 
-import android.provider.Settings;
 import android.util.Patterns;
 import android.widget.EditText;
 
