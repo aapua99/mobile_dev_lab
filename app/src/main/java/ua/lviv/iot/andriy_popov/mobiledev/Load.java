@@ -17,4 +17,5 @@ public class Load extends DialogFragment {
         builder.setView(view);
         return builder.create();
     }
+
 }

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,8 +15,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private static final int MIN_LENGTH_PASS = 8;
 
     private EditText emailEdit;
     private EditText nameEdit;
@@ -47,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_sign_in:
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(this, SignInActivity.class));
                 break;
             case R.id.button_sign_up:
                 signUp();
@@ -72,6 +69,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     });
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    private boolean validateAllFields() {
+        return ValidateFields.validateEmail(emailEdit) && ValidateFields.validateName(nameEdit) &&
+                ValidateFields.validatePhone(phoneEdit) && ValidateFields.validatePass(passEdit);
+
+    }
+>>>>>>> Stashed changes
 
     private void onSuccessfulSignUp() {
         FirebaseUser user = auth.getCurrentUser();
@@ -101,6 +107,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         alertDialog.show();
     }
 
+<<<<<<< Updated upstream
     private boolean validateFields() {
         if (!Patterns.EMAIL_ADDRESS.matcher(emailEdit.getText().toString()).matches()) {
             emailEdit.setError(getString(R.string.email_wrong));
@@ -128,6 +135,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         return true;
     }
+=======
+>>>>>>> Stashed changes
 
     @Override
     public void onBackPressed() {
