@@ -44,7 +44,7 @@ public class ValidateFields {
 
     public static boolean validateName(EditText nameEdit) {
         if (nameEdit.getText().toString().isEmpty()) {
-            nameEdit.setError("Error name");
+            nameEdit.setError("Error");
             return false;
         } else {
             nameEdit.setError(null);

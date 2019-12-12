@@ -14,9 +14,9 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 
         if(checkInternet(context))
         {
-            Toast.makeText(context, "Network Available Do operations", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Network Available", Toast.LENGTH_LONG).show();
         }else {
-            Toast.makeText(context, "Network NOT Available Do operations", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Network NOT Available", Toast.LENGTH_LONG).show();
         }
 
     }
