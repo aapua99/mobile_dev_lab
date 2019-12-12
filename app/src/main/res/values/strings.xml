@@ -21,4 +21,17 @@
     <string name="welcome_label">Welcome</string>
     <string name="sign_out_label">Sign out</string>
     <string name="failed">Failed</string>
+    <string name="save">Save</string>
+    <string name="error_upload">Error upload</string>
+    <string name="success_upload">Success upload</string>
+    <string name="error_download">Error download</string>
+    <string name="browser_label">Browser</string>
+    <string name="creator_label">Creator</string>
+    <string name="date_register_label">Date register</string>
+    <string name="date_start_play_label">Date start play</string>
+    <string name="status_label">Status</string>
+    <string name="add_game">Add game</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
