@@ -2,7 +2,9 @@ package ua.lviv.iot.andriy_popov.mobiledev;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Game {
+import java.io.Serializable;
+
+public class Game implements Serializable {
 
     @SerializedName("name")
     private String name;

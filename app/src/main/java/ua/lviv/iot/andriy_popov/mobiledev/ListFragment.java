@@ -1,110 +1,91 @@
 package ua.lviv.iot.andriy_popov.mobiledev;
 
-import android.content.Context;
-import android.net.Uri;
+import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ListFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.List;
+import java.util.Objects;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ListFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    public ListFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ListFragment newInstance(String param1, String param2) {
-        ListFragment fragment = new ListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private ListView listView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private DialogFragment loadFragment;
+    private List<Game> postList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
+        listView = view.findViewById(R.id.listOfGame);
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
+            Intent intent =new Intent(getContext(), GameActivity.class);
+            intent.putExtra("GAME", postList.get(position));
+            startActivity(intent);
+        });
+        swipeRefreshLayout = view.findViewById(R.id.swipe_container);
+        loadFragment =new Load();
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            loadGamesFromDB();
+            swipeRefreshLayout.setRefreshing(false);
+        });
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(v -> {
+          Intent intent =new Intent(getContext(), AddGameActivity.class);
+          startActivity(intent);
+        });
+        loadGamesFromDB();
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void loadGamesFromDB() {
+        loadFragment.show(Objects.requireNonNull(getActivity()).getFragmentManager(), "comment");
+        ApiUtil.getServiceClass().getAllGames().enqueue(new Callback<List<Game>>() {
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                if (response.isSuccessful()) {
+                    loadFragment.dismiss();
+                    postList = response.body();
+                    GameAdapter adapter = new GameAdapter(Objects.requireNonNull(getActivity())
+                            .getApplicationContext(), postList);
+                    listView.setAdapter(adapter);
+                } else {
+                    showError();
+                    loadFragment.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+                loadFragment.dismiss();
+            }
+        });
+    }
+    private void showError() {
+        final AlertDialog alertDialog = new AlertDialog.Builder(Objects.requireNonNull(getActivity())
+                .getApplicationContext()).create();
+        alertDialog.setTitle(getString(R.string.failed));
+        alertDialog.setMessage(getString(R.string.failed));
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok_label),
+                (dialog, which) -> dialog.dismiss());
+        alertDialog.show();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
