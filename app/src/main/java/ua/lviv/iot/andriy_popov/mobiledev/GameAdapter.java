@@ -10,12 +10,11 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameAdapter extends ArrayAdapter<Game> {
 
-    public GameAdapter(Context context, List<Game> users) {
+    GameAdapter(Context context, List<Game> users) {
         super(context, 0, users);
     }
 
@@ -25,15 +24,13 @@ public class GameAdapter extends ArrayAdapter<Game> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_list_games, parent, false);
         }
-
-
         TextView nameGame = convertView.findViewById(R.id.nameGame);
         TextView creatorGame = convertView.findViewById(R.id.creatorGame);
         TextView browserGame = convertView.findViewById(R.id.browserGame);
         TextView dateRegister = convertView.findViewById(R.id.dateRegister);
         TextView dateStartPlay = convertView.findViewById(R.id.dateStartPlay);
         TextView status = convertView.findViewById(R.id.status);
-        ImageView image =convertView.findViewById(R.id.imageView);
+        ImageView image = convertView.findViewById(R.id.imageView);
         Picasso.get()
                 .load(game.getImage())
                 .resize(320, 120)
