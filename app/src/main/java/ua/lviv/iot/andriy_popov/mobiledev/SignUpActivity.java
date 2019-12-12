@@ -2,14 +2,11 @@ package ua.lviv.iot.andriy_popov.mobiledev;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import ua.lviv.iot.andriy_popov.mobiledev.ValidateFields;
 
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,8 +15,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private static final int MIN_LENGTH_PASS = 8;
 
     private EditText emailEdit;
     private EditText nameEdit;
@@ -49,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_sign_in:
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(this, SignInActivity.class));
                 break;
             case R.id.button_sign_up:
                 signUp();
@@ -74,9 +69,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     });
         }
     }
+
     private boolean validateAllFields() {
-      return ValidateFields.validateEmail(emailEdit) && ValidateFields.validateName(nameEdit) &&
-              ValidateFields.validatePhone(phoneEdit) && ValidateFields.validatePass(passEdit);
+        return ValidateFields.validateEmail(emailEdit) && ValidateFields.validateName(nameEdit) &&
+                ValidateFields.validatePhone(phoneEdit) && ValidateFields.validatePass(passEdit);
 
     }
 
@@ -107,7 +103,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 (dialog, which) -> dialog.dismiss());
         alertDialog.show();
     }
-
 
 
     @Override
